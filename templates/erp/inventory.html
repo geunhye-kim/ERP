@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block title %}
+    재고 현황
+{% endblock %}
+{% block content %}
+    <div class="inventory_title">
+        <h4>관리자 {{ accounts.username }}님의 페이지</h4>
+    </div>
+    <table>
+        <tr>
+            <th>코드</th>
+            <th>이름</th>
+            <th>사이즈</th>
+            <th>가격</th>
+            <th>재고량</th>
+            <th>설명</th>
+            <th>입고 날짜</th>
+            <th>출고 날짜</th>
+        </tr>
+        {% for pro in product_list %}
+            <tr>
+                <td>{{ pro.product_code }}</td>
+                <td>{{ pro.product_name }}</td>
+                <td>{{ pro.product_size }}</td>
+                <td>{{ pro.product_price }}원</td>
+                <td>{{ pro.product_quantity }}</td>
+                <td>{{ pro.product_desc }}</td>
+                <td>{{ inbound_date }}</td>
+                <td>{{ outbound_date }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+{% endblock %}

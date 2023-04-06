@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% block title %}
+    상품 등록
+{% endblock %}
+{% block content %}
+    <div class="container">
+        <div class="wrap">
+            <h2 class="title-center"> 상품 등록 </h2>
+            <form class="form-area" method="post" action="/productcreate/">
+                {% csrf_token %}
+                <div class="form-group mt-2 mb-2">
+                    <label for="username">상품 코드</label>
+                    <input type="text" class="form-control" id="product_code" name="product_code">
+                </div>
+                <div class="form-group mt-2 mb-2">
+                    <label for="username">상품 이름</label>
+                    <input type="text" class="form-control" id="product_name" name="product_name">
+                </div>
+                <select class="form-select" aria-label="Default select example" id="product_size" name="product_size">
+                    <label for="username"></label>
+                    <option selected>상품 사이즈</option>
+                    <option value="S">Small</option>
+                    <option value="M">Medium</option>
+                    <option value="L">Large</option>
+                    <option value="F">Free</option>
+                </select>
+                <div class="form-group mt-2 mb-2">
+                    <label for="username">상품 가격</label>
+                    <input type="text" class="form-control" id="product_price" name="product_price">
+                </div>
+                <div class="form-group mt-2 mb-2">
+                    <label for="username">상품 설명</label>
+                    <input type="text" class="form-control" id="product_desc" name="product_desc">
+                </div>
+                {% if error %}
+                    <div class="alert alert-danger" role="alert">
+                        {{ error }}
+                    </div>
+                {% endif %}
+                <hr>
+                <div style="float: right">
+                    <button type="submit" class="btn btn-primary">등록하기</button>
+                    <a href="/login" class="btn btn-secondary">취소하기</a>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}
