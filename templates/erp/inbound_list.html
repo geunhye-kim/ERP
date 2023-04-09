@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title %}
+    입고 목록
+{% endblock %}
+{% block content %}
+    <div class="list_title">
+        <h4>"{{ product_name }}" 상세 입고 내역 페이지</h4>
+    </div>
+    <table>
+        <tr>
+            <th>입고일</th>
+            <th>입고량</th>
+        </tr>
+        {% for inb in inbound_list %}
+            <tr>
+                <td>{{ inb.inbound_date }}</td>
+                <td>{{ inb.inbound_quantity }}</td>
+            </tr>
+        {% endfor %}
+
+    </table>
+{% endblock %}

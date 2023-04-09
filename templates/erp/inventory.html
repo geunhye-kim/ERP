@@ -1,10 +1,10 @@
 {% extends 'base.html' %}
 {% block title %}
-    재고 현황
+    상품 목록
 {% endblock %}
 {% block content %}
-    <div class="inventory_title">
-        <h4>관리자 {{ accounts.username }}님의 페이지</h4>
+    <div class="list_title">
+        <h4>"{{ user_name }}" 님, 오늘도 화이팅! :)</h4>
     </div>
     <table>
         <tr>
@@ -14,8 +14,8 @@
             <th>가격</th>
             <th>재고량</th>
             <th>설명</th>
-            <th>입고 날짜</th>
-            <th>출고 날짜</th>
+            <th>입고</th>
+            <th>출고</th>
         </tr>
         {% for pro in product_list %}
             <tr>
@@ -25,9 +25,10 @@
                 <td>{{ pro.product_price }}원</td>
                 <td>{{ pro.product_quantity }}</td>
                 <td>{{ pro.product_desc }}</td>
-                <td>{{ inbound_date }}</td>
-                <td>{{ outbound_date }}</td>
+                <td><a href="/inboundlist/{{ pro.id }}" class="btn btn-outline-dark">보기</a></td>
+                <td><a href="/outboundlist/{{ pro.id }}" class="btn btn-outline-dark">보기</a></td>
             </tr>
         {% endfor %}
+
     </table>
 {% endblock %}

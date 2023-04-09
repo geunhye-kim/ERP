@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title %}
+    출고 목록
+{% endblock %}
+{% block content %}
+    <div class="list_title">
+        <h4>"{{ product_name }}" 상세 출고 내역 페이지</h4>
+    </div>
+    <table>
+        <tr>
+            <th>입고일</th>
+            <th>입고량</th>
+        </tr>
+        {% for outb in outbound_list %}
+            <tr>
+                <td>{{ outb.outbound_date }}</td>
+                <td>{{ outb.outbound_quantity }}</td>
+            </tr>
+        {% endfor %}
+
+    </table>
+{% endblock %}
