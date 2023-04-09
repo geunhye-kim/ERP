@@ -62,9 +62,11 @@ def inbound_create(request):
         inbound_quantity = request.POST.get('product_quantity', '')
 
         if product_code == '상품 코드':
-            return render(request, 'erp/inbound_create.html', {'error': '상품 코드를 입력해 주세요.'})
+            product_list = Product.objects.all()
+            return render(request, 'erp/inbound_create.html', {'product_list': product_list, 'error': '상품 코드를 입력해 주세요.'})
         elif inbound_quantity == '':
-            return render(request, 'erp/inbound_create.html', {'error': '수량을 입력해 주세요.'})
+            product_list = Product.objects.all()
+            return render(request, 'erp/inbound_create.html', {'product_list': product_list, 'error': '수량을 입력해 주세요.'})
         else:
             product = Product.objects.get(product_code=product_code)
             product.product_quantity += int(inbound_quantity)
@@ -86,14 +88,17 @@ def outbound_create(request):
         product_code = request.POST.get('product_code', '')
         outbound_quantity = request.POST.get('product_quantity', '')
 
+        if product_code == '상품 코드':
+            product_list = Product.objects.all()
+            return render(request, 'erp/outbound_create.html', {'product_list': product_list, 'error': '상품 코드를 입력해 주세요.'})
+        elif outbound_quantity == '':
+            product_list = Product.objects.all()
+            return render(request, 'erp/outbound_create.html', {'product_list': product_list, 'error': '수량을 입력해 주세요.'})
 
         product_quantity = Product.objects.get(product_code=product_code).product_quantity
-        if product_code == '상품 코드':
-            return render(request, 'erp/outbound_create.html', {'error': '상품 코드를 입력해 주세요.'})
-        elif outbound_quantity == '':
-            return render(request, 'erp/outbound_create.html', {'error': '수량을 입력해 주세요.'})
-        elif int(outbound_quantity) > int(product_quantity):
-            return render(request, 'erp/outbound_create.html', {'error': '출고량이 재고량보다 높을 수 없습니다.'})
+        if int(outbound_quantity) > int(product_quantity):
+            product_list = Product.objects.all()
+            return render(request, 'erp/outbound_create.html', {'product_list': product_list, 'error': '출고량이 재고량보다 높을 수 없습니다.'})
         else:
             product = Product.objects.get(product_code=product_code)
             product.product_quantity -= int(outbound_quantity)
